@@ -14,17 +14,17 @@ abstract public class Player : MonoBehaviour
     private                    Transform   spawnPos;
     private                    Transform   lastPos;
     private                    GameObject  isHolding;
-    [ SerializeField ] private float       currentSanity = 100;
-    [ SerializeField ] private float       speed;
-    [ SerializeField ] private float       dashSpeed;
-    [ SerializeField ] private Text        sanity;
-    [ SerializeField ] private float       maxSanity;
     private                    float       timePassed = 0f;
     private                    bool        isDashing;
     private                    float       sanityTimer       = 1f;
     private                    float       sanityTimerPassed = 0f;
     private                    IEnumerator CoroutineAddSanity;
     private                    IEnumerator CoroutineDepleteSanity;
+    [ SerializeField ] private float       currentSanity = 100;
+    [ SerializeField ] private float       speed;
+    [ SerializeField ] private float       dashSpeed;
+    [ SerializeField ] private Text        sanity;
+    [ SerializeField ] private float       maxSanity;
 
 
     public Player( float maxSanity , float maxStamina , Transform spawnPos ){
@@ -58,7 +58,7 @@ abstract public class Player : MonoBehaviour
          float h = Input.GetAxis( hInput );
          float v = Input.GetAxis( vInput );
          //Debug.Log(string.Format("{0};{1}", h,v));
-         GetComponent<Rigidbody2D>().velocity = new Vector2( h,v ) * (speed * Time.fixedDeltaTime); 
+         GetComponent<Rigidbody2D>().velocity = new Vector2( h,v ) * (speed * Time.fixedDeltaTime);
          lastPos = transform;
      }
 
@@ -126,6 +126,8 @@ abstract public class Player : MonoBehaviour
             StartCoroutine( CoroutineDepleteSanity );
         }
     }
+    
+    
 
     
 }
