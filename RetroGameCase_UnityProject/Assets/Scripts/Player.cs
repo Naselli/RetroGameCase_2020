@@ -1,20 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 abstract public class Player : MonoBehaviour
 {
-    private                  float      maxSanity;
-    private                  float      currentSanity;
-    private                  float      maxStamina;
-    private                  float      currentStamina;
-    private                  Transform  spawnPos;
-    private                  Transform  lastPos;
-    private                  GameObject isHolding;
-    [SerializeField] private float      speed;
-    [SerializeField] private float      dashSpeed;
-    float                               timePassed = 0f;
+    
+    
+    private                    float       maxStamina;
+    private                    float       currentStamina;
+    private                    Transform   spawnPos;
+    private                    Transform   lastPos;
+    private                    GameObject  isHolding;
+    [ SerializeField ] private float       currentSanity = 100;
+    [ SerializeField ] private float       speed;
+    [ SerializeField ] private float       dashSpeed;
+    [ SerializeField ] private Text        sanity;
+    [ SerializeField ] private float       maxSanity;
+    private                    float       timePassed = 0f;
+    private                    bool        isDashing;
+    private                    float       sanityTimer       = 1f;
+    private                    float       sanityTimerPassed = 0f;
+    private                    IEnumerator CoroutineAddSanity;
+    private                    IEnumerator CoroutineDepleteSanity;
 
 
     public Player( float maxSanity , float maxStamina , Transform spawnPos ){
@@ -23,33 +33,95 @@ abstract public class Player : MonoBehaviour
         this.spawnPos = spawnPos;
     }
 
+
+    virtual public void Start(){
+        currentSanity = 100;
+        sanity.text = currentSanity.ToString();
+        CoroutineAddSanity = AddSanity();
+        CoroutineDepleteSanity = DepleteSanity();
+        StartCoroutine( CoroutineDepleteSanity );
+    }
+
+    virtual public void Update(){
+        sanity.text = currentSanity.ToString();
+    }
+
+    public float CurrentSanity{
+        get => currentSanity;
+        set => currentSanity = value;
+    }
+
      virtual public void Move(string hInput, string vInput, GameObject p){
+         if( isDashing )
+             return;
+         
          float h = Input.GetAxis( hInput );
          float v = Input.GetAxis( vInput );
          //Debug.Log(string.Format("{0};{1}", h,v));
-         transform.Translate(new Vector2( h,v ) * (speed * Time.deltaTime));
+         GetComponent<Rigidbody2D>().velocity = new Vector2( h,v ) * (speed * Time.fixedDeltaTime); 
          lastPos = transform;
      }
 
     virtual public void Dash( string dashInput ){
         if(!Input.GetButtonDown(dashInput))
             return;
-        Debug.Log("DASH");
-        Vector2 localDir = transform.InverseTransformDirection( lastPos.position - transform.position );
-        StartCoroutine( dashCoroutine( localDir, .5f ) );
+        //Debug.Log("DASH");
+        StartCoroutine( dashCoroutine( .5f ) );
     }
 
-    private IEnumerator dashCoroutine(Vector2 dir, float duration){
-        /*    
-        while( timePassed < duration ){
-            transform.Translate( dir * (dashSpeed * Time.deltaTime));
-            timePassed += Time.deltaTime;
-        }
-        timePassed = 0;
-        */
-        Vector2 newPos = transform.position * dir * ( speed * Time.deltaTime );
-        Vector2.Lerp( transform.position , newPos , 1f );
-        yield return null;
+    private IEnumerator dashCoroutine( float duration){
+        isDashing = true;
+        Vector2 localDir = GetComponent< Rigidbody2D >().velocity;
+        GetComponent<Rigidbody2D>().AddForce(localDir.normalized * dashSpeed, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(duration);
+        isDashing = false;
     }
+
+    public IEnumerator DepleteSanity(){
+        while( true ){
+            currentSanity -= 1;
+            //Debug.Log("Deplete Sanity");
+            if( currentSanity > maxSanity )
+                currentSanity = maxSanity;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    public IEnumerator AddSanity(){
+        while( true ){
+            currentSanity += 2;
+            //Debug.Log("Add Sanity");
+            if( currentSanity > maxSanity )
+                currentSanity = maxSanity;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    
+    virtual public void OnTriggerEnter2D( Collider2D other ){
+        //if( !other.CompareTag( "Light" ) ) ; 
+        //return;
+        if( other.CompareTag( "Light" ) ){
+            StopCoroutine( CoroutineDepleteSanity);
+            CoroutineDepleteSanity = null;
+            
+            if (CoroutineAddSanity == null) 
+                CoroutineAddSanity = AddSanity();
+            
+            StartCoroutine( CoroutineAddSanity );
+        }
+    }
+
+    virtual public void OnTriggerExit2D( Collider2D other ){
+        //if ( !other.CompareTag( "Light" ) ) 
+        //return;
+        if( other.CompareTag( "Light" ) ){
+            StopCoroutine( CoroutineAddSanity );
+            CoroutineAddSanity = null;    
+            
+            if (CoroutineDepleteSanity == null) 
+                CoroutineDepleteSanity = DepleteSanity();
+            StartCoroutine( CoroutineDepleteSanity );
+        }
+    }
+
     
 }
