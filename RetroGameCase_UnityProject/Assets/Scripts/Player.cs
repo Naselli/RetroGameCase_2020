@@ -108,6 +108,10 @@ abstract public class Player : MonoBehaviour
             
             StartCoroutine( CoroutineAddSanity );
         }
+
+        if( other.CompareTag( "Ghost" ) ){
+            CurrentSanity -= 10;
+        }
     }
 
     virtual public void OnTriggerExit2D( Collider2D other ){

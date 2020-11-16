@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Light
+  - Spawnpoint
+  - Ghost
+  - PlayerOne
   layers:
   - Default
   - TransparentFX
