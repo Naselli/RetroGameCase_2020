@@ -8,6 +8,7 @@ TagManager:
   - Spawnpoint
   - Ghost
   - PlayerOne
+  - Vacuum
   layers:
   - Default
   - TransparentFX

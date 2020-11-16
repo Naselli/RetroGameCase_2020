@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,11 @@ public class Ghost : MonoBehaviour
         if( Vector2.Distance(transform.position, player.transform.position) < distanceToPlayer ){
             transform.position = Vector2.MoveTowards( transform.position , player.transform.position , speed * Time.fixedDeltaTime );
         }
+    }
 
+    private void OnTriggerEnter2D( Collider2D other ){
+        if( other.CompareTag( "PlayerOne" ) ){
+            player.GetComponent<Player>().CurrentSanity -= 10;
+        }
     }
 }
