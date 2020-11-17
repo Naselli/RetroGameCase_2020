@@ -5,10 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Light
-  - Spawnpoint
-  - Ghost
-  - PlayerOne
   - Vacuum
+  - Spawnpoint
+  - PlayerOne
+  - Ghost
+  - Hand
+  - Veggie
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Light
+  - Gun
   - 
   - 
   - 

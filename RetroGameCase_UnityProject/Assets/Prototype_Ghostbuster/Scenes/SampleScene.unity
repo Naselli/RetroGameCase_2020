@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 6822219}
   - component: {fileID: 6822218}
   - component: {fileID: 6822217}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light (3)
   m_TagString: Light
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 119453317}
   - component: {fileID: 119453318}
   - component: {fileID: 119453319}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right
   m_TagString: Vacuum
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119453316}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2033,9 +2033,13 @@ MonoBehaviour:
   h: Horizontal
   v: Vertical
   dash: Dash
+  timePassed: 0
+  sanityTimer: 0
+  sanityTimerPassed: 0
+  amountCaught: 0
   currentSanity: 100
   speed: 200
-  dashSpeed: 15
+  dashSpeed: 20
   sanity: {fileID: 1794078045}
   maxSanity: 100
   colLeft: {fileID: 1586428044}
@@ -2151,7 +2155,7 @@ GameObject:
   - component: {fileID: 1050969660}
   - component: {fileID: 1050969661}
   - component: {fileID: 1050969662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Top
   m_TagString: Vacuum
   m_Icon: {fileID: 0}
@@ -2165,7 +2169,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050969659}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2226,7 +2230,7 @@ GameObject:
   - component: {fileID: 1112345313}
   - component: {fileID: 1112345312}
   - component: {fileID: 1112345311}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light (4)
   m_TagString: Light
   m_Icon: {fileID: 0}
@@ -2510,7 +2514,7 @@ GameObject:
   - component: {fileID: 1361397491}
   - component: {fileID: 1361397490}
   - component: {fileID: 1361397489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light (1)
   m_TagString: Light
   m_Icon: {fileID: 0}
@@ -2870,7 +2874,7 @@ GameObject:
   - component: {fileID: 1586428045}
   - component: {fileID: 1586428046}
   - component: {fileID: 1586428047}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left
   m_TagString: Vacuum
   m_Icon: {fileID: 0}
@@ -2884,7 +2888,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586428044}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3080,7 +3084,7 @@ GameObject:
   - component: {fileID: 1758361605}
   - component: {fileID: 1758361604}
   - component: {fileID: 1758361609}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light
   m_TagString: Light
   m_Icon: {fileID: 0}
@@ -3237,7 +3241,7 @@ GameObject:
   - component: {fileID: 1792759624}
   - component: {fileID: 1792759623}
   - component: {fileID: 1792759622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light (2)
   m_TagString: Light
   m_Icon: {fileID: 0}
@@ -3535,7 +3539,7 @@ GameObject:
   - component: {fileID: 2013831313}
   - component: {fileID: 2013831314}
   - component: {fileID: 2013831315}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bottom
   m_TagString: Vacuum
   m_Icon: {fileID: 0}
@@ -3549,7 +3553,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013831312}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
