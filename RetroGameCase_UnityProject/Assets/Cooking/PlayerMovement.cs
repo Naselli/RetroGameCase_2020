@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal" + player);
         movement.y = Input.GetAxisRaw("Vertical" + player);
 
-        if( Input.GetButtonDown("Attack" +player) ){
+        if( Input.GetButtonDown("Attack" + player) ){
             if( veggieWeAreOnTopOf != null && veggieWeAreOnTopOf.GetComponent<Veggie>().State == Veggie.Type.Alive ){
                 Veggie script = veggieWeAreOnTopOf.GetComponent< Veggie >();
                 script.State = Veggie.Type.Dead;
