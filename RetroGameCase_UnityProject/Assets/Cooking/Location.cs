@@ -11,18 +11,23 @@ public class Location : MonoBehaviour
       SoupBowl,
    }
 
-   private LocationType locationType;
+   private Veggie veggieOnLocation;
+
+   private LocationType type;
 
    private void Start(){
       switch( this.gameObject.tag ){
          case "CuttingBoard":
-            locationType = LocationType.CuttingBoard;
+            type = LocationType.CuttingBoard;
             break;
          case "SoupBowl":
-            locationType = LocationType.SoupBowl;
+            type = LocationType.SoupBowl;
             break;
       }
    }
-   
-   
+   public LocationType Type{
+      get => type;
+      set => type = value;
+   }
+
 }
