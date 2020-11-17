@@ -11,6 +11,8 @@ TagManager:
   - Ghost
   - Hand
   - Veggie
+  - CuttingBoard
+  - SoupBowl
   layers:
   - Default
   - TransparentFX

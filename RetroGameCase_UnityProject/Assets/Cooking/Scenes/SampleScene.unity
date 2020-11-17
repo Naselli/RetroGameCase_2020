@@ -683,9 +683,10 @@ GameObject:
   - component: {fileID: 662593295}
   - component: {fileID: 662593294}
   - component: {fileID: 662593296}
+  - component: {fileID: 662593297}
   m_Layer: 0
   m_Name: CuttingBoard (1)
-  m_TagString: Untagged
+  m_TagString: CuttingBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -781,6 +782,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2490041, y: 2.0389247}
   m_EdgeRadius: 0
+--- !u!114 &662593297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662593293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be89443097f0de45a1f443ee7da7975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669945630
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,7 +806,6 @@ GameObject:
   - component: {fileID: 669945631}
   - component: {fileID: 669945633}
   - component: {fileID: 669945634}
-  - component: {fileID: 669945635}
   m_Layer: 0
   m_Name: Veggie
   m_TagString: Veggie
@@ -861,7 +873,7 @@ Transform:
   m_GameObject: {fileID: 669945630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.53, y: 1.4, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -897,27 +909,6 @@ MonoBehaviour:
   speed: 3
   player: {fileID: 1661338231}
   minDis: 1
---- !u!50 &669945635
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669945630}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &693390654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,9 +1029,10 @@ GameObject:
   - component: {fileID: 796369339}
   - component: {fileID: 796369338}
   - component: {fileID: 796369340}
+  - component: {fileID: 796369341}
   m_Layer: 0
   m_Name: CuttingBoard
-  m_TagString: Untagged
+  m_TagString: CuttingBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1136,6 +1128,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5085683, y: 2.0378954}
   m_EdgeRadius: 0
+--- !u!114 &796369341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796369337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be89443097f0de45a1f443ee7da7975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1001303938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,9 +1151,10 @@ GameObject:
   - component: {fileID: 1001303940}
   - component: {fileID: 1001303939}
   - component: {fileID: 1001303941}
+  - component: {fileID: 1001303942}
   m_Layer: 0
   m_Name: Soup (1)
-  m_TagString: Untagged
+  m_TagString: SoupBowl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1236,6 +1241,18 @@ CircleCollider2D:
   m_Offset: {x: -0.17198373, y: -0.0790074}
   serializedVersion: 2
   m_Radius: 0.40035987
+--- !u!114 &1001303942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001303938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be89443097f0de45a1f443ee7da7975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1022027847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,9 +1783,10 @@ GameObject:
   - component: {fileID: 1533328311}
   - component: {fileID: 1533328310}
   - component: {fileID: 1533328312}
+  - component: {fileID: 1533328313}
   m_Layer: 0
   m_Name: Soup
-  m_TagString: Untagged
+  m_TagString: SoupBowl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1855,6 +1873,18 @@ CircleCollider2D:
   m_Offset: {x: -0.17823991, y: -0.079624884}
   serializedVersion: 2
   m_Radius: 0.39935732
+--- !u!114 &1533328313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533328309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be89443097f0de45a1f443ee7da7975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1661338231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,7 +1920,9 @@ MonoBehaviour:
   moveSpeed: 4
   rb: {fileID: 1661338233}
   hand: {fileID: 220380883}
-  isHolding: {fileID: 0}
+  objectHolding: {fileID: 0}
+  veggieWeAreOnTopOf: {fileID: 0}
+  currentLocation: {fileID: 0}
 --- !u!50 &1661338233
 Rigidbody2D:
   serializedVersion: 4
@@ -1951,7 +1983,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9d3d562e344a4f74f9dcbaa7fb7b65f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
