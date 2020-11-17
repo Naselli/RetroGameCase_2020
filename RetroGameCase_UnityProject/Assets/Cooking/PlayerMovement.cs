@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     [ SerializeField ] private float       moveSpeed = 5f;
     [ SerializeField ] private Rigidbody2D rb;
     [ SerializeField ] private GameObject  hand;
-    [ SerializeField ] private GameObject      objectHolding;
-    [ SerializeField ] private GameObject      veggieWeAreOnTopOf;
+    [ SerializeField ] private GameObject  objectHolding;
+    [ SerializeField ] private GameObject  veggieWeAreOnTopOf;
     [ SerializeField ] private Location    currentLocation;
     [ SerializeField ] private string      player;
+    [ SerializeField ] private GameObject  leftCol;
+    [ SerializeField ] private GameObject  rightCol;
 
     private Vector2 movement;
 
@@ -19,6 +21,15 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal" + player);
         movement.y = Input.GetAxisRaw("Vertical" + player);
+
+        if( movement.x >  0){
+            leftCol.SetActive(false);
+            rightCol.SetActive(true);
+        }
+        else{
+            leftCol.SetActive(true);
+            rightCol.SetActive(false);
+        }
 
         if( Input.GetButtonDown("Attack" + player) ){
             if( veggieWeAreOnTopOf != null && veggieWeAreOnTopOf.GetComponent<Veggie>().State == Veggie.Type.Alive ){
