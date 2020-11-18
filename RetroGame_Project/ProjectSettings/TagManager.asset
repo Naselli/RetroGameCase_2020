@@ -8,6 +8,8 @@ TagManager:
   - Soup
   - Veggie
   - Item
+  - Ingredient
+  - Kettle
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - 
   - 
   - Fence
-  - 
+  - Bomb
   - 
   - 
   - 
