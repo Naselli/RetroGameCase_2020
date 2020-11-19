@@ -28,10 +28,7 @@ public class Ingredient : MonoBehaviour
                 break;
         }
     }
-
-    private void Update(){
-    }
-
+    
     public Type TypeOfIngredient{
         get => typeOfIngredient;
         set => typeOfIngredient = value;

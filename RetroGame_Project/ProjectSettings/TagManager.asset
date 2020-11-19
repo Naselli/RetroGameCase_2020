@@ -4,12 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CuttingBoard
-  - Soup
-  - Veggie
-  - Item
-  - Ingredient
   - Kettle
+  - Ingredient
+  - Potion
+  - Explosion
   layers:
   - Default
   - TransparentFX
@@ -19,8 +17,8 @@ TagManager:
   - UI
   - 
   - 
-  - Fence
-  - Bomb
+  - 
+  - 
   - 
   - 
   - 

@@ -6,12 +6,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [ Header( "Movement" ) ]
-    [ SerializeField ] private float speed;
+    [ SerializeField ] private float      speed;
+    [ SerializeField ] private float      throwSpeed;
     [ SerializeField ] private string     player = "1";
     [ SerializeField ] private GameObject hand;
+    [ SerializeField ] private int        currentHealth;
     
     private Vector2     _moveVector;
     private Rigidbody2D _rb;
+    private bool        canBroom = true;
 
     [ Header( "current state" ) ]
     [ SerializeField ] private GameObject    itemIsHolding;
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     }
 
     private void Update(){
+        //Maybe change to normal get axis to calculate a more precise move dir for the throw
         _moveVector.x = Input.GetAxisRaw( "Horizontal" + player );
         _moveVector.y = Input.GetAxisRaw( "Vertical" + player );
         
@@ -46,6 +50,18 @@ public class Player : MonoBehaviour
                     DropItem();
             }
         }
+
+        if( Input.GetButtonDown( "Attack" + player ) ){
+            
+            if( itemIsHolding != null ){
+                if( itemIsHolding.tag == "Potion" )
+                    YeetPotion();
+            }
+            else if (canBroom){
+                DropItem();
+                StartCoroutine( DoBroomSpeed() );
+            }
+        }
     }
     private void FixedUpdate() => _rb.MovePosition(_rb.position + _moveVector * (speed * Time.fixedDeltaTime));
 
@@ -57,14 +73,44 @@ public class Player : MonoBehaviour
         else if (other.TryGetComponent< Kettle >( out var kettle ) )
             currentLocation = kettle;
         
+        if( other.gameObject.tag == "Explosion" ){
+            switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
+                case Explosion.ExplosionType.Fire:
+                    currentHealth += 20;
+                    break;
+                case Explosion.ExplosionType.Slime:
+                    speed /= 2f;
+                    break;
+                case Explosion.ExplosionType.Poison: 
+                    StartCoroutine( DamageOverTime() );
+                    break;
+            }
+        }
     }
     private void OnTriggerExit2D( Collider2D other ){
         //if (other.GetComponent<Item>() == itemYouAreOnTopOf)
             itemYouAreOnTopOf = null;
+        
+        if (!(itemYouAreOnTopOf is null) && other.GetComponent< Potion >() == itemYouAreOnTopOf )
+            itemYouAreOnTopOf = null;
+        
         if (other.GetComponent< Kettle >() == currentLocation )
             currentLocation = null;
+        
+        if( other.gameObject.tag == "Explosion" ){
+            switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
+                case Explosion.ExplosionType.Fire:
+                    break;
+                case Explosion.ExplosionType.Slime:
+                    speed *= 2;
+                    break;
+                case Explosion.ExplosionType.Poison:
+                    StopCoroutine( DamageOverTime() );
+                    break;
+            }
+        }
     }
-    
+
     private void DropItem(){
         if (itemIsHolding != null){
             itemIsHolding.GetComponent< SpriteRenderer >().sortingOrder--;
@@ -85,4 +131,33 @@ public class Player : MonoBehaviour
             itemIsHolding.GetComponent<SpriteRenderer>().sortingOrder++;
         }
     }
+    private void YeetPotion(){
+        itemIsHolding.GetComponent< Rigidbody2D >().isKinematic = false;
+        itemIsHolding.GetComponent< Rigidbody2D >().AddForce(_moveVector * throwSpeed , ForceMode2D.Impulse );
+        StartCoroutine( DelayColliderEnable() );
+
+    }
+    private IEnumerator DoBroomSpeed(){
+        speed *= 2;
+        yield return new WaitForSeconds(5f);
+        StartCoroutine( BroomCooldown() );
+        speed /= 2;
+    }
+    private IEnumerator BroomCooldown(){
+        canBroom = false;
+        yield return new WaitForSeconds(10f);
+        canBroom = true;
+    }
+    private IEnumerator DelayColliderEnable(){
+        yield return new WaitForSeconds(.5f);
+        itemIsHolding.GetComponent< Potion >().Col.enabled = true;
+        DropItem();
+    }
+    private IEnumerator DamageOverTime(){
+        while( true ){
+            currentHealth -= 5;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    
 }
