@@ -64,7 +64,6 @@ public class Kettle : MonoBehaviour
     }
     
     private IEnumerator SpawnPotion( GameObject potion ){
-        
         yield return new WaitForSeconds(3f); //wait for x seconds to brew potion NEEDS FEEDBACK
         GameObject g = Instantiate( potion , potionSpawnpoint.transform.position , Quaternion.identity );
         g.transform.parent = potionSpawnpoint.transform;

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         //Maybe change to normal get axis to calculate a more precise move dir for the throw
         _moveVector.x = Input.GetAxisRaw( "Horizontal" + player );
         _moveVector.y = Input.GetAxisRaw( "Vertical" + player );
-        
+
         if (Input.GetButtonDown("PickUp" + player) )
         {
             if ( itemYouAreOnTopOf != null ){
@@ -52,7 +52,6 @@ public class Player : MonoBehaviour
                     DropItem();
             }
         }
-
         if( Input.GetButtonDown( "Attack" + player ) ){
             
             if( itemIsHolding != null ){
