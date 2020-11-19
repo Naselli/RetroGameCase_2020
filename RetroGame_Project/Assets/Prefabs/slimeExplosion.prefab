@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1011703369465597939}
   - component: {fileID: 1011703369465597948}
   - component: {fileID: 1011703369465597949}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: slimeExplosion
   m_TagString: Explosion
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2704795028729661598}
   - component: {fileID: 744455094591373053}
   - component: {fileID: 6492009700414212150}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePotion
   m_TagString: Potion
   m_Icon: {fileID: 0}

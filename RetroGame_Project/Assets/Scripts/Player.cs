@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     [ SerializeField ] private GameObject itemYouAreOnTopOf;
     [ SerializeField ] private Kettle     currentLocation;
 
+    private IEnumerator coroutine = null;
+
     private void Start(){
         _rb = GetComponent< Rigidbody2D >();
     }
@@ -66,6 +68,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate() => _rb.MovePosition(_rb.position + _moveVector * (speed * Time.fixedDeltaTime));
 
     private void OnTriggerEnter2D( Collider2D other ){
+        
         if (other.TryGetComponent< Potion >( out var potion ) )
             itemYouAreOnTopOf = potion.gameObject;
         else if (other.TryGetComponent< Ingredient >( out var ingredient ) )
@@ -76,13 +79,15 @@ public class Player : MonoBehaviour
         if( other.gameObject.tag == "Explosion" ){
             switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
                 case Explosion.ExplosionType.Fire:
-                    currentHealth += 20;
+                    currentHealth -= 10;
+                    Debug.Log("DAMAGE");
                     break;
                 case Explosion.ExplosionType.Slime:
                     speed /= 2f;
                     break;
-                case Explosion.ExplosionType.Poison: 
-                    StartCoroutine( DamageOverTime() );
+                case Explosion.ExplosionType.Poison:
+                    coroutine = DamageOverTime();
+                    StartCoroutine( coroutine );
                     break;
             }
         }
@@ -105,7 +110,9 @@ public class Player : MonoBehaviour
                     speed *= 2;
                     break;
                 case Explosion.ExplosionType.Poison:
-                    StopCoroutine( DamageOverTime() );
+                    Debug.Log("YEEEEEEET"  );
+                    StopCoroutine( coroutine );
+                    coroutine = null;
                     break;
             }
         }
@@ -160,4 +167,8 @@ public class Player : MonoBehaviour
         }
     }
     
+    public int CurrentHealth{
+        get => currentHealth;
+        set => currentHealth = value;
+    }
 }

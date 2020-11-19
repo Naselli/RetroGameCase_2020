@@ -13,6 +13,7 @@ public class UI : MonoBehaviour
     [ SerializeField ] private Text playerTwoHealth;
 
     private void Update(){
-        
+        playerOneHealth.text = playerOne.GetComponent< Player >().CurrentHealth.ToString();
+        playerTwoHealth.text = playerTwo.GetComponent< Player >().CurrentHealth.ToString();
     }
 }

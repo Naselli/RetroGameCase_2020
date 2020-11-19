@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 578850528319752797}
   - component: {fileID: 692981318507384545}
   - component: {fileID: 306952408499099971}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimePotion
   m_TagString: Potion
   m_Icon: {fileID: 0}

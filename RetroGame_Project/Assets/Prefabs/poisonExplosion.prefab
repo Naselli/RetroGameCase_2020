@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 142562892660770344}
   - component: {fileID: 142562892660770351}
   - component: {fileID: 142562892660770350}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: poisonExplosion
   m_TagString: Explosion
   m_Icon: {fileID: 0}
