@@ -35,7 +35,7 @@ public class Explosion : MonoBehaviour
                 StartCoroutine( DelayEndExplosion( 3f ) );
                 break;
             case ExplosionType.Poison: sR.color = Color.magenta;
-                StartCoroutine( DelayEndExplosion( 3f ) );
+                StartCoroutine( DelayEndExplosion( 5f ) );
                 break;
         }
     }

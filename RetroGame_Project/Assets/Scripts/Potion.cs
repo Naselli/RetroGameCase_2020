@@ -16,14 +16,14 @@ public class Potion : MonoBehaviour
     [ SerializeField ] private GameObject poisonExplosion;
     [ SerializeField ] private GameObject fireExplosion;
     [ SerializeField ] private GameObject slimeExplosion;
-    [ SerializeField ] private Collider2D col;
-    
 
     private SpriteRenderer sR;
+    private Rigidbody2D    rB;
     
     void Start()
     {
         sR = GetComponent< SpriteRenderer >();
+        rB = GetComponent< Rigidbody2D >();
 
         switch( typeOfPotion ){
             case PotionType.Fire: sR.color = Color.red;
@@ -35,17 +35,15 @@ public class Potion : MonoBehaviour
         }
     }
 
-    public Collider2D Col{
-        get => col;
-        set => col = value;
-    }
-
-    private void OnCollisionEnter2D( Collision2D other ){
-        switch( typeOfPotion ){
-            case PotionType.Fire: FireDamage(); break;
-            case PotionType.Poison: PoisonDamage(); break;
-            case PotionType.Slime: SlimeDamage(); break;
+    private void OnTriggerEnter2D( Collider2D other ){
+        if( rB.velocity.magnitude > 0f ){
+            switch( typeOfPotion ){
+                case PotionType.Fire:   FireDamage(); break;
+                case PotionType.Poison: PoisonDamage(); break;
+                case PotionType.Slime:  SlimeDamage(); break;
+            }
         }
+        
     }
 
     private void FireDamage(){

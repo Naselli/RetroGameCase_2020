@@ -96,8 +96,8 @@ public class Player : MonoBehaviour
         //if (other.GetComponent<Item>() == itemYouAreOnTopOf)
             itemYouAreOnTopOf = null;
         
-        if (!(itemYouAreOnTopOf is null) && other.GetComponent< Potion >() == itemYouAreOnTopOf )
-            itemYouAreOnTopOf = null;
+        //if (!(itemYouAreOnTopOf is null) && other.GetComponent< Potion >() == itemYouAreOnTopOf )
+        //    itemYouAreOnTopOf = null;
         
         if (other.GetComponent< Kettle >() == currentLocation )
             currentLocation = null;
@@ -134,6 +134,7 @@ public class Player : MonoBehaviour
 
         if (itemIsHolding != null){
             itemIsHolding.transform.SetParent( hand.transform );
+            itemYouAreOnTopOf = null; // MAYBE IDK OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
             itemIsHolding.transform.localPosition = Vector2.zero;
             itemIsHolding.GetComponent<SpriteRenderer>().sortingOrder++;
         }
@@ -157,7 +158,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator DelayColliderEnable(){
         yield return new WaitForSeconds(.5f);
-        itemIsHolding.GetComponent< Potion >().Col.enabled = true;
+        //itemIsHolding.GetComponent< Potion >().Col.enabled = true;
         DropItem();
     }
     private IEnumerator DamageOverTime(){
@@ -166,7 +167,6 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    
     public int CurrentHealth{
         get => currentHealth;
         set => currentHealth = value;
