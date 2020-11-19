@@ -50,7 +50,6 @@ MonoBehaviour:
   poisonExplosion: {fileID: 142562892660770349, guid: f360c7f00e14df14b8ac165aa5d4e7c3, type: 3}
   fireExplosion: {fileID: 8882232329071629723, guid: 709a7629d3160124cbd7ace73e20aec1, type: 3}
   slimeExplosion: {fileID: 1011703369465597950, guid: 247f4db051bf4204db4503104bc40b7e, type: 3}
-  col: {fileID: 0}
 --- !u!212 &5184609874664064137
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -70,7 +69,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
