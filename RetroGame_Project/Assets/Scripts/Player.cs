@@ -110,8 +110,11 @@ public class Player : MonoBehaviour
                     break;
                 case Explosion.ExplosionType.Poison:
                     Debug.Log("YEEEEEEET"  );
-                    StopCoroutine( coroutine );
-                    coroutine = null;
+                    if( coroutine != null ){
+                        StopCoroutine( coroutine );
+                        coroutine = null;
+                    }
+                    
                     break;
             }
         }

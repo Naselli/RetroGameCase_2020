@@ -61,4 +61,6 @@ public class Potion : MonoBehaviour
         Destroy(gameObject);
     }
     
+    //MAKE FUNCTION EXPLODE IF POTION IS NOT PICKED UP IN TIME
+    
 }

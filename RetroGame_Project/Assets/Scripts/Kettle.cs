@@ -64,10 +64,10 @@ public class Kettle : MonoBehaviour
     }
     
     private IEnumerator SpawnPotion( GameObject potion ){
-        yield return new WaitForSeconds(3f); //wait for x seconds to brew potion NEEDS FEEDBACK
+        yield return new WaitForSeconds(4f); //wait for x seconds to brew potion NEEDS FEEDBACK
         GameObject g = Instantiate( potion , potionSpawnpoint.transform.position , Quaternion.identity );
         g.transform.parent = potionSpawnpoint.transform;
-
+        StartCoroutine( TooLate( g ) );
     }
 
     private IEnumerator DisableKettle(){
@@ -79,6 +79,11 @@ public class Kettle : MonoBehaviour
         canSpawnPotion = true;
         //Change back to working sprite
     }
-    
+
+    private IEnumerator TooLate( GameObject g ){
+        yield return new  WaitForSeconds(5f);
+        Destroy( g );
+        StartCoroutine( DisableKettle() );
+    }
     
 }
