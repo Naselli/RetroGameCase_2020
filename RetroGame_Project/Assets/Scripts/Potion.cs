@@ -50,17 +50,12 @@ public class Potion : MonoBehaviour
         Instantiate( fireExplosion , transform.position , Quaternion.identity );
         Destroy(gameObject);
     }
-    
     private void SlimeDamage(){
         Instantiate( slimeExplosion , transform.position , Quaternion.identity );
         Destroy(gameObject);
     }
-    
     private void PoisonDamage(){
         Instantiate( poisonExplosion , transform.position , Quaternion.identity );
         Destroy(gameObject);
     }
-    
-    //MAKE FUNCTION EXPLODE IF POTION IS NOT PICKED UP IN TIME
-    
 }

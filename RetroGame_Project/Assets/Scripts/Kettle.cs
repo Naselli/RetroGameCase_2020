@@ -74,6 +74,7 @@ public class Kettle : MonoBehaviour
         kettleCol.enabled = false;
         canSpawnPotion = false;
         //Change to broken sprite
+        ResetCounts();
         yield return new WaitForSeconds(5f);
         kettleCol.enabled = true;
         canSpawnPotion = true;
@@ -81,9 +82,8 @@ public class Kettle : MonoBehaviour
     }
 
     private IEnumerator TooLate( GameObject g ){
-        yield return new  WaitForSeconds(5f);
+        yield return new  WaitForSeconds(10f);
         Destroy( g );
         StartCoroutine( DisableKettle() );
     }
-    
 }

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [ SerializeField ] private string     player = "1";
     [ SerializeField ] private GameObject hand;
     [ SerializeField ] private int        currentHealth;
+    [ SerializeField ] private GameObject enemy;
     
     private Vector2     _moveVector;
     private Rigidbody2D _rb;
@@ -142,8 +143,11 @@ public class Player : MonoBehaviour
         }
     }
     private void YeetPotion(){
+
+        Vector2 dir = enemy.transform.position - transform.position;
+        Vector2 localDir = transform.InverseTransformDirection( dir );
         itemIsHolding.GetComponent< Rigidbody2D >().isKinematic = false;
-        itemIsHolding.GetComponent< Rigidbody2D >().AddForce(_moveVector * throwSpeed , ForceMode2D.Impulse );
+        itemIsHolding.GetComponent< Rigidbody2D >().AddForce(localDir * throwSpeed/2 , ForceMode2D.Impulse );
         StartCoroutine( DelayColliderEnable() );
 
     }
