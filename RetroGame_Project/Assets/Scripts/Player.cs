@@ -15,15 +15,14 @@ public class Player : MonoBehaviour
     
     private Vector2     _moveVector;
     private Rigidbody2D _rb;
-    private bool        canBroom = true;
-
+    private bool        canBroom  = true;
+    private IEnumerator coroutine = null;
+    
     [ Header( "current state" ) ]
     [ SerializeField ] private GameObject    itemIsHolding;
     [ SerializeField ] private GameObject itemYouAreOnTopOf;
     [ SerializeField ] private Kettle     currentLocation;
-
-    private IEnumerator coroutine = null;
-
+    
     private void Start(){
         _rb = GetComponent< Rigidbody2D >();
     }
@@ -147,7 +146,7 @@ public class Player : MonoBehaviour
         Vector2 dir = enemy.transform.position - transform.position;
         Vector2 localDir = transform.InverseTransformDirection( dir );
         itemIsHolding.GetComponent< Rigidbody2D >().isKinematic = false;
-        itemIsHolding.GetComponent< Rigidbody2D >().AddForce(localDir * throwSpeed/2 , ForceMode2D.Impulse );
+        itemIsHolding.GetComponent< Rigidbody2D >().AddForce(localDir * 3 , ForceMode2D.Impulse );
         StartCoroutine( DelayColliderEnable() );
 
     }

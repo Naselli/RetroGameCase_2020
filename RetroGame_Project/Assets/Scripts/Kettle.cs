@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Kettle : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Kettle : MonoBehaviour
     [ SerializeField ] private Collider2D kettleCol;
     [ SerializeField ] private GameObject potionSpawnpoint;
     [ SerializeField ] private bool       canSpawnPotion = true;
-    [ SerializeField ] private GameObject brewingSprite;
+    [ SerializeField ] private GameObject progressBar;
     
     
     [Header("Potion prefabs")]
@@ -64,7 +65,9 @@ public class Kettle : MonoBehaviour
     }
     
     private IEnumerator SpawnPotion( GameObject potion ){
-        yield return new WaitForSeconds(4f); //wait for x seconds to brew potion NEEDS FEEDBACK
+        StartCoroutine( ProgressBar(6) );
+        yield return new WaitForSeconds(6f);
+       //wait for x seconds to brew potion NEEDS FEEDBACK
         GameObject g = Instantiate( potion , potionSpawnpoint.transform.position , Quaternion.identity );
         g.transform.parent = potionSpawnpoint.transform;
         StartCoroutine( TooLate( g ) );
@@ -85,5 +88,18 @@ public class Kettle : MonoBehaviour
         yield return new  WaitForSeconds(10f);
         Destroy( g );
         StartCoroutine( DisableKettle() );
+    }
+
+    private IEnumerator ProgressBar(int steps){
+        progressBar.SetActive(true);
+        BarScript script = progressBar.GetComponent< BarScript >();
+        for( int i = 0 ; i < steps ; i++ ){
+            yield return new WaitForSeconds(1f);
+            Debug.Log("FILL");
+            script.IncreaseProgress();
+            
+        }
+        progressBar.SetActive(false);
+        script.ResetBar();
     }
 }
