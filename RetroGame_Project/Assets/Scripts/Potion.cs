@@ -24,15 +24,6 @@ public class Potion : MonoBehaviour
     {
         sR = GetComponent< SpriteRenderer >();
         rB = GetComponent< Rigidbody2D >();
-
-        switch( typeOfPotion ){
-            case PotionType.Fire: sR.color = Color.red;
-                break;
-            case PotionType.Slime: sR.color = Color.green;
-                break;
-            case PotionType.Poison: sR.color = Color.magenta;
-                break;
-        }
     }
 
     private void OnTriggerEnter2D( Collider2D other ){
@@ -43,7 +34,6 @@ public class Potion : MonoBehaviour
                 case PotionType.Slime:  SlimeDamage(); break;
             }
         }
-        
     }
 
     private void FireDamage(){
