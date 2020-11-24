@@ -13,9 +13,6 @@ public class Explosion : MonoBehaviour
     }
 
     [ SerializeField ] private ExplosionType typeOfExplosion;
-
-    [ SerializeField ] private SpriteRenderer sR;
-
     public ExplosionType TypeOfExplosion{
         get => typeOfExplosion;
         set => typeOfExplosion = value;
@@ -23,18 +20,14 @@ public class Explosion : MonoBehaviour
     
     void Start()
     {
-        sR = GetComponent< SpriteRenderer >();
-        Color alpha = sR.color;
-        alpha.a = .5f;
-        
         switch( typeOfExplosion ){
-            case ExplosionType.Fire: sR.color = Color.red;
+            case ExplosionType.Fire: 
                 StartCoroutine( DelayEndExplosion( 1f ) );
                 break;
-            case ExplosionType.Slime: sR.color = Color.green;
+            case ExplosionType.Slime: 
                 StartCoroutine( DelayEndExplosion( 3f ) );
                 break;
-            case ExplosionType.Poison: sR.color = Color.magenta;
+            case ExplosionType.Poison:
                 StartCoroutine( DelayEndExplosion( 5f ) );
                 break;
         }

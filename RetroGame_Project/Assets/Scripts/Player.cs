@@ -12,7 +12,12 @@ public class Player : MonoBehaviour
     [ SerializeField ] private GameObject hand;
     [ SerializeField ] private int        currentHealth;
     [ SerializeField ] private GameObject enemy;
-    
+
+    [ Header( "Sprites" ) ] 
+    [ SerializeField ] private SpriteRenderer playerSprite;
+    [ SerializeField ] private Sprite broomSprite;
+    [ SerializeField ] private Sprite idleSprite;
+
     private Vector2     _moveVector;
     private Rigidbody2D _rb;
     private bool        canBroom  = true;
@@ -32,6 +37,14 @@ public class Player : MonoBehaviour
         _moveVector.x = Input.GetAxisRaw( "Horizontal" + player );
         _moveVector.y = Input.GetAxisRaw( "Vertical" + player );
 
+        if( _moveVector.x > 0 ){
+            playerSprite.flipX = true;            
+        }
+        if( _moveVector.x < 0 ){
+            playerSprite.flipX = false;            
+        }
+        
+        
         if (Input.GetButtonDown("PickUp" + player) )
         {
             if ( itemYouAreOnTopOf != null ){
@@ -154,10 +167,12 @@ public class Player : MonoBehaviour
 
     }
     private IEnumerator DoBroomSpeed(){
-        speed *= 2;
+        speed +=2;
+        playerSprite.sprite = broomSprite;
         yield return new WaitForSeconds(5f);
+        playerSprite.sprite = idleSprite;
         StartCoroutine( BroomCooldown() );
-        speed /= 2;
+        speed -= 2;
     }
     private IEnumerator BroomCooldown(){
         canBroom = false;
