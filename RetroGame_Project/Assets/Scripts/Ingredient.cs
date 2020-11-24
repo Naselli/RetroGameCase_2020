@@ -14,21 +14,6 @@ public class Ingredient : MonoBehaviour
     }
     [SerializeField] private Type typeOfIngredient;
 
-    private SpriteRenderer sR;
-
-    private void Start(){
-        sR = GetComponent< SpriteRenderer >();
-
-        switch( TypeOfIngredient ){
-            case Type.Fire: sR.color = Color.red;
-                break;
-            case Type.Slime: sR.color = Color.green;
-                break;
-            case Type.Poison: sR.color = Color.magenta;
-                break;
-        }
-    }
-    
     public Type TypeOfIngredient{
         get => typeOfIngredient;
         set => typeOfIngredient = value;

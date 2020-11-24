@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Kettle : MonoBehaviour
 {
@@ -11,12 +12,25 @@ public class Kettle : MonoBehaviour
     [ SerializeField ] private int      slimeCount;
     [ SerializeField ] private int      poisonCount;
     
-    [Space]
     [ SerializeField ] private Collider2D kettleCol;
     [ SerializeField ] private GameObject potionSpawnpoint;
     [ SerializeField ] private bool       canSpawnPotion = true;
+    [ SerializeField ] private bool       isSpawning = false;
     [ SerializeField ] private GameObject progressBar;
     
+    [Header("Sprite")]
+    [ SerializeField ] private SpriteRenderer WoodSprite;
+    [ SerializeField ] private SpriteRenderer KettleSprite;
+    [Space]
+    [ SerializeField ] private Sprite Wood_ON;
+    [ SerializeField ] private Sprite     Wood_OFF;
+    [ SerializeField ] private Sprite     Broken;
+    [ SerializeField ] private Sprite     Red;
+    [ SerializeField ] private Sprite     Green;
+    [ SerializeField ] private Sprite     Purple;
+    [ SerializeField ] private Sprite     White;
+    [ SerializeField ] private GameObject light;
+    [ SerializeField ] private GameObject particleSys;
     
     [Header("Potion prefabs")]
     [ SerializeField ] private GameObject firePotion;
@@ -51,10 +65,29 @@ public class Kettle : MonoBehaviour
     }
     
     public void AddIngredient( Ingredient i ){
+
+        if( !canSpawnPotion || isSpawning){
+            return;
+        }
+        
+        transform.DOPunchScale( new Vector3( 0.9f , 0.9f , 0.9f ) , .2f );
+        
         switch( i.TypeOfIngredient ){
-            case Ingredient.Type.Fire:   fireCount++; break;
-            case Ingredient.Type.Slime:  slimeCount++; break;
-            case Ingredient.Type.Poison: poisonCount++; break;
+            case Ingredient.Type.Fire:   
+                fireCount++;
+                KettleSprite.sprite = Red;
+                particleSys.GetComponent<ParticleSystem>().startColor = Color.red;
+                break;
+            case Ingredient.Type.Slime:  
+                slimeCount++; 
+                KettleSprite.sprite = Green;
+                particleSys.GetComponent<ParticleSystem>().startColor = Color.green;
+                break;
+            case Ingredient.Type.Poison: 
+                poisonCount++; 
+                KettleSprite.sprite = Purple;
+                particleSys.GetComponent<ParticleSystem>().startColor = Color.magenta;
+                break;
         }
     }
 
@@ -66,22 +99,33 @@ public class Kettle : MonoBehaviour
     
     private IEnumerator SpawnPotion( GameObject potion ){
         StartCoroutine( ProgressBar(6) );
+        isSpawning = true;
         yield return new WaitForSeconds(6f);
-       //wait for x seconds to brew potion NEEDS FEEDBACK
+        isSpawning = false;
+        KettleSprite.sprite = White;
+        particleSys.GetComponent<ParticleSystem>().startColor = Color.white;
         GameObject g = Instantiate( potion , potionSpawnpoint.transform.position , Quaternion.identity );
         g.transform.parent = potionSpawnpoint.transform;
-        StartCoroutine( TooLate( g ) );
+        //StartCoroutine( TooLate( g ) );
     }
 
     private IEnumerator DisableKettle(){
+        ResetCounts();
         kettleCol.enabled = false;
         canSpawnPotion = false;
-        //Change to broken sprite
-        ResetCounts();
+        WoodSprite.sprite = Wood_OFF;
+        KettleSprite.sprite = Broken;
+        light.SetActive( false );
+        particleSys.SetActive( false );
         yield return new WaitForSeconds(5f);
         kettleCol.enabled = true;
         canSpawnPotion = true;
-        //Change back to working sprite
+        WoodSprite.sprite = Wood_ON;
+        KettleSprite.sprite = White;
+        
+        light.SetActive( true );
+        particleSys.SetActive( true );
+        particleSys.GetComponent<ParticleSystem>().startColor = Color.white;
     }
 
     private IEnumerator TooLate( GameObject g ){

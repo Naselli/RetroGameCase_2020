@@ -76,6 +76,9 @@ public class Player : MonoBehaviour
             currentLocation = kettle;
         
         if( other.gameObject.tag == "Explosion" ){
+            
+            Camera.main.gameObject.GetComponent<ScreenShake>().Shake(.5f);
+            
             switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
                 case Explosion.ExplosionType.Fire:
                     currentHealth -= 10;
