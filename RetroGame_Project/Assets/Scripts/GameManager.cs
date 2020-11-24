@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     [ SerializeField ] private GameObject playerOne;
     [ SerializeField ] private GameObject playerTwo;
+    [ SerializeField ] private GameObject healthPlayerTwo;
+    [ SerializeField ] private GameObject healthPlayerOne;
     
      private Player playerOneScript;
      private Player playerTwoScript;
@@ -27,6 +29,10 @@ public class GameManager : MonoBehaviour
         if( playerTwoScript.CurrentHealth <= 0 ){
             LoadAnotherScene(1);
         }
+        
+        healthPlayerOne.transform.localScale = new Vector3(playerOneScript.CurrentHealth / 100f , 1,1);
+        healthPlayerTwo.transform.localScale = new Vector3(playerTwoScript.CurrentHealth / 100f , 1,1);
+        
     }
 
     private void LoadAnotherScene( int index ){

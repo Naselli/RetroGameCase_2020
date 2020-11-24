@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     [ SerializeField ] private SpriteRenderer playerSprite;
     [ SerializeField ] private Sprite broomSprite;
     [ SerializeField ] private Sprite idleSprite;
+    [ SerializeField ] private SpriteRenderer speedIcon;
+    [ SerializeField ] private Sprite speedOn;
+    [ SerializeField ] private Sprite speedOff;
 
     private Vector2     _moveVector;
     private Rigidbody2D _rb;
@@ -178,18 +181,20 @@ public class Player : MonoBehaviour
     }
     private IEnumerator DoBroomSpeed(){
         StartCoroutine( BroomCooldown() );
-        speed +=2;
+        speed +=3;
         anim.SetBool("Broom", true);
         playerSprite.sprite = broomSprite;
         yield return new WaitForSeconds(5f);
         anim.SetBool("Broom", false);
         playerSprite.sprite = idleSprite;
-        speed -= 2;
+        speed -= 3;
     }
     private IEnumerator BroomCooldown(){
         canBroom = false;
+        speedIcon.sprite = speedOff;
         yield return new WaitForSeconds(10f);
         canBroom = true;
+        speedIcon.sprite = speedOn;
     }
     private IEnumerator DelayColliderEnable(){
         yield return new WaitForSeconds(.5f);
