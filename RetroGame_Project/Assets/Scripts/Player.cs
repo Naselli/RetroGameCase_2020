@@ -22,14 +22,17 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private bool        canBroom  = true;
     private IEnumerator coroutine = null;
+    private Animator    anim;
     
     [ Header( "current state" ) ]
     [ SerializeField ] private GameObject    itemIsHolding;
     [ SerializeField ] private GameObject itemYouAreOnTopOf;
     [ SerializeField ] private Kettle     currentLocation;
-    
+    private static readonly    int        IsWalking = Animator.StringToHash( "isWalking" );
+
     private void Start(){
         _rb = GetComponent< Rigidbody2D >();
+        anim = GetComponent< Animator >();
     }
 
     private void Update(){
@@ -37,6 +40,13 @@ public class Player : MonoBehaviour
         _moveVector.x = Input.GetAxisRaw( "Horizontal" + player );
         _moveVector.y = Input.GetAxisRaw( "Vertical" + player );
 
+        if( (_moveVector.y + _moveVector.x) != 0){
+            anim.SetBool(IsWalking, true);
+        }
+        else{
+            anim.SetBool(IsWalking, false);
+        }
+        
         if( _moveVector.x > 0 ){
             playerSprite.flipX = true;            
         }
@@ -167,11 +177,13 @@ public class Player : MonoBehaviour
 
     }
     private IEnumerator DoBroomSpeed(){
+        StartCoroutine( BroomCooldown() );
         speed +=2;
+        anim.SetBool("Broom", true);
         playerSprite.sprite = broomSprite;
         yield return new WaitForSeconds(5f);
+        anim.SetBool("Broom", false);
         playerSprite.sprite = idleSprite;
-        StartCoroutine( BroomCooldown() );
         speed -= 2;
     }
     private IEnumerator BroomCooldown(){

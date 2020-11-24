@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Explosion : MonoBehaviour
 {
@@ -18,8 +19,9 @@ public class Explosion : MonoBehaviour
         set => typeOfExplosion = value;
     }
     
-    void Start()
-    {
+    void Start(){
+        transform.DOPunchScale( new Vector3(1,1,1) , .2f  );
+
         switch( typeOfExplosion ){
             case ExplosionType.Fire: 
                 StartCoroutine( DelayEndExplosion( 1f ) );
