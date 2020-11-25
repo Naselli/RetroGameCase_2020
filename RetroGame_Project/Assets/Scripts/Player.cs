@@ -31,15 +31,21 @@ public class Player : MonoBehaviour
     
     [ Header( "current state" ) ]
     [ SerializeField ] private GameObject    itemIsHolding;
-    [ SerializeField ] private GameObject itemYouAreOnTopOf;
-    [ SerializeField ] private Kettle     currentLocation;
-    private static readonly    int        IsWalking = Animator.StringToHash( "isWalking" );
+    [ SerializeField ] private GameObject     itemYouAreOnTopOf;
+    [ SerializeField ] private Kettle         currentLocation;
+    private static readonly    int            IsWalking = Animator.StringToHash( "isWalking" );
+    public                     ParticleSystem dust;
 
     private void Start(){
         _rb = GetComponent< Rigidbody2D >();
         anim = GetComponent< Animator >();
     }
 
+    void CreateDust()
+    {
+        dust.Play();
+    }
+    
     private void Update(){
         //Maybe change to normal get axis to calculate a more precise move dir for the throw
         _moveVector.x = Input.GetAxisRaw( "Horizontal" + player );
@@ -47,6 +53,7 @@ public class Player : MonoBehaviour
 
         if( (_moveVector.y + _moveVector.x) != 0){
             anim.SetBool(IsWalking, true);
+            CreateDust();
         }
         else{
             anim.SetBool(IsWalking, false);
