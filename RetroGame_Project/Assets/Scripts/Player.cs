@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     [ SerializeField ] private SpriteRenderer speedIcon;
     [ SerializeField ] private Sprite speedOn;
     [ SerializeField ] private Sprite speedOff;
+    [ SerializeField ] private GameObject healthbar;
 
     private Vector2     _moveVector;
     private Rigidbody2D _rb;
@@ -108,6 +110,7 @@ public class Player : MonoBehaviour
             switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
                 case Explosion.ExplosionType.Fire:
                     currentHealth -= 10;
+                    healthbar.transform.DOPunchScale( new Vector3( 1 , 1 , 1 ) , .2f );
                     Debug.Log("DAMAGE");
                     break;
                 case Explosion.ExplosionType.Slime:
@@ -204,6 +207,7 @@ public class Player : MonoBehaviour
     private IEnumerator DamageOverTime(){
         while( true ){
             currentHealth -= 5;
+            healthbar.transform.DOPunchScale( new Vector3( 1 , 1 , 1 ) , .2f );
             yield return new WaitForSeconds(1f);
         }
     }

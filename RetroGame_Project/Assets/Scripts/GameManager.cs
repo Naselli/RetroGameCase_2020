@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,8 +13,12 @@ public class GameManager : MonoBehaviour
     [ SerializeField ] private GameObject healthPlayerTwo;
     [ SerializeField ] private GameObject healthPlayerOne;
     
+    [ SerializeField ] private GameObject winnerMenu;
+    [ SerializeField ] private Text winner;
+    
      private Player playerOneScript;
      private Player playerTwoScript;
+    private  bool   isWinner = false;
 
     private void Start(){
         playerOneScript = playerOne.GetComponent< Player >();
@@ -22,12 +28,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( playerOneScript.CurrentHealth <= 0 ){
-            LoadAnotherScene(1);
+        if( playerOneScript.CurrentHealth <= 0 && isWinner == false){
+            winnerMenu.SetActive(true);
+            winnerMenu.transform.DOMoveY( -4f , 1f );
+            winner.text = "Player2";
+            isWinner = true;
+            Debug.Log("help");
         }
         
-        if( playerTwoScript.CurrentHealth <= 0 ){
-            LoadAnotherScene(1);
+        if( playerTwoScript.CurrentHealth <= 0 && isWinner == false){
+            winnerMenu.SetActive(true);
+            winnerMenu.transform.DOMoveY( -4f , 1f );
+            winner.text = "Player1";
+            isWinner = true;
         }
         
         healthPlayerOne.transform.localScale = new Vector3(playerOneScript.CurrentHealth / 100f , 1,1);
