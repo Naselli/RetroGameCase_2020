@@ -174,18 +174,18 @@ public class Player : MonoBehaviour
     
     private IEnumerator DoBroomSpeed(){
         StartCoroutine( BroomCooldown() );
-        speed +=3;
+        speed +=5;
         anim.SetBool("Broom", true);
         playerSprite.sprite = broomSprite;
         yield return new WaitForSeconds(5f);
         anim.SetBool("Broom", false);
         playerSprite.sprite = idleSprite;
-        speed -= 3;
+        speed -= 5;
     }
     private IEnumerator BroomCooldown(){
         canBroom = false;
         speedIcon.sprite = speedOff;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(15f);
         canBroom = true;
         speedIcon.sprite = speedOn;
     }
