@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
     [ SerializeField ] private GameObject playerTwo;
     [ SerializeField ] private GameObject healthPlayerTwo;
     [ SerializeField ] private GameObject healthPlayerOne;
-    
+    [ SerializeField ] private GameObject dark;
     [ SerializeField ] private GameObject winnerMenu;
-    [ SerializeField ] private Text winner;
+    [ SerializeField ] private Text       winner;
     
      private Player playerOneScript;
      private Player playerTwoScript;
@@ -33,13 +33,14 @@ public class GameManager : MonoBehaviour
             winnerMenu.transform.DOMoveY( -4f , 1f );
             winner.text = "Player2";
             isWinner = true;
-            Debug.Log("help");
+            dark.SetActive(true);
         }
         
         if( playerTwoScript.CurrentHealth <= 0 && isWinner == false){
             winnerMenu.SetActive(true);
             winnerMenu.transform.DOMoveY( -4f , 1f );
             winner.text = "Player1";
+            dark.SetActive(true);
             isWinner = true;
         }
         

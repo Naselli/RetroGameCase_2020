@@ -14,6 +14,7 @@ public class Explosion : MonoBehaviour
     }
 
     [ SerializeField ] private ExplosionType typeOfExplosion;
+    [ SerializeField ] private ParticleSystem part;
     public ExplosionType TypeOfExplosion{
         get => typeOfExplosion;
         set => typeOfExplosion = value;
@@ -21,16 +22,16 @@ public class Explosion : MonoBehaviour
     
     void Start(){
         transform.DOPunchScale( new Vector3(1,1,1) , .2f  );
-
+        part.Play();
         switch( typeOfExplosion ){
             case ExplosionType.Fire: 
                 StartCoroutine( DelayEndExplosion( 1f ) );
                 break;
             case ExplosionType.Slime: 
-                StartCoroutine( DelayEndExplosion( 3f ) );
-                break;
+                StartCoroutine( DelayEndExplosion( 1f ) );
+                break;    
             case ExplosionType.Poison:
-                StartCoroutine( DelayEndExplosion( 5f ) );
+                StartCoroutine( DelayEndExplosion( 1f ) );
                 break;
         }
     }

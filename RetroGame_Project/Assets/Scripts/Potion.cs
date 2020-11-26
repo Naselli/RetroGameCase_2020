@@ -22,6 +22,7 @@ public class Potion : MonoBehaviour
     
     void Start()
     {
+        GetComponent<Rigidbody2D>().AddTorque(360, ForceMode2D.Impulse);
         sR = GetComponent< SpriteRenderer >();
         rB = GetComponent< Rigidbody2D >();
     }

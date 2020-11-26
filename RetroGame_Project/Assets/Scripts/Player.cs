@@ -116,16 +116,15 @@ public class Player : MonoBehaviour
             
             switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
                 case Explosion.ExplosionType.Fire:
-                    currentHealth -= 10;
+                    currentHealth -= 20;
                     healthbar.transform.DOPunchScale( new Vector3( 1 , 1 , 1 ) , .2f );
                     Debug.Log("DAMAGE");
                     break;
                 case Explosion.ExplosionType.Slime:
-                    speed /= 2f;
+                    StartCoroutine( slowingDown() );
                     break;
                 case Explosion.ExplosionType.Poison:
-                    coroutine = DamageOverTime();
-                    StartCoroutine( coroutine );
+                    StartCoroutine( DamageOverTime() );
                     break;
             }
         }
@@ -140,25 +139,8 @@ public class Player : MonoBehaviour
         if (other.GetComponent< Kettle >() == currentLocation )
             currentLocation = null;
         
-        if( other.gameObject.tag == "Explosion" ){
-            switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
-                case Explosion.ExplosionType.Fire:
-                    break;
-                case Explosion.ExplosionType.Slime:
-                    speed *= 2;
-                    break;
-                case Explosion.ExplosionType.Poison:
-                    Debug.Log("YEEEEEEET"  );
-                    if( coroutine != null ){
-                        StopCoroutine( coroutine );
-                        coroutine = null;
-                    }
-                    
-                    break;
-            }
-        }
     }
-
+    
     private void DropItem(){
         if (itemIsHolding != null){
             itemIsHolding.GetComponent< SpriteRenderer >().sortingOrder--;
@@ -189,6 +171,7 @@ public class Player : MonoBehaviour
         StartCoroutine( DelayColliderEnable() );
 
     }
+    
     private IEnumerator DoBroomSpeed(){
         StartCoroutine( BroomCooldown() );
         speed +=3;
@@ -212,12 +195,20 @@ public class Player : MonoBehaviour
         DropItem();
     }
     private IEnumerator DamageOverTime(){
-        while( true ){
+        for( int i = 0 ; i < 4 ; i++ ){
             currentHealth -= 5;
             healthbar.transform.DOPunchScale( new Vector3( 1 , 1 , 1 ) , .2f );
             yield return new WaitForSeconds(1f);
         }
+           
+        
     }
+    private IEnumerator slowingDown(){
+        speed /= 2f;
+        yield return new WaitForSeconds(3f);
+        speed *= 2;
+    }
+    
     public int CurrentHealth{
         get => currentHealth;
         set => currentHealth = value;

@@ -48,3 +48,6 @@ TagManager:
   - name: Front
     uniqueID: 2471222583
     locked: 0
+  - name: explosion
+    uniqueID: 894992425
+    locked: 0
