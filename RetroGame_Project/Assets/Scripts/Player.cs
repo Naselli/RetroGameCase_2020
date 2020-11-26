@@ -178,13 +178,13 @@ public class Player : MonoBehaviour
     private IEnumerator DoBroomSpeed(){
         GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Bezem");
         StartCoroutine( BroomCooldown() );
-        speed +=5;
+        speed +=3;
         anim.SetBool("Broom", true);
         playerSprite.sprite = broomSprite;
         yield return new WaitForSeconds(5f);
         anim.SetBool("Broom", false);
         playerSprite.sprite = idleSprite;
-        speed -= 5;
+        speed -= 3;
     }
     private IEnumerator BroomCooldown(){
         canBroom = false;
