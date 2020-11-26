@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(15f);
         canBroom = true;
         speedIcon.sprite = speedOn;
-        //play a sound 
+        GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Ready");
         speedIcon.transform.DOPunchScale( new Vector3( 1 , 1 , 1 ) , .2f );
     }
     private IEnumerator DelayColliderEnable(){
