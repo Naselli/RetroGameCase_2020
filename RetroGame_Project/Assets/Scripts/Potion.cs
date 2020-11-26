@@ -29,6 +29,7 @@ public class Potion : MonoBehaviour
 
     private void OnTriggerEnter2D( Collider2D other ){
         if( rB.velocity.magnitude > 0f ){
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("explosion");
             switch( typeOfPotion ){
                 case PotionType.Fire:   FireDamage(); break;
                 case PotionType.Poison: PoisonDamage(); break;

@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
             winner.text = "Player2";
             isWinner = true;
             dark.SetActive(true);
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Witch");
         }
         
         if( playerTwoScript.CurrentHealth <= 0 && isWinner == false){
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
             winner.text = "Player1";
             dark.SetActive(true);
             isWinner = true;
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Witch");
         }
         
         healthPlayerOne.transform.localScale = new Vector3(playerOneScript.CurrentHealth / 100f , 1,1);

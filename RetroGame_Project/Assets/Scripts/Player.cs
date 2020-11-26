@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
             else if ( itemYouAreOnTopOf == null ){
                 if( currentLocation != null && itemIsHolding != null){
                     if( itemIsHolding.CompareTag("Ingredient" ) ){
+                        GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Water");
                         currentLocation.AddIngredient(itemIsHolding.GetComponent<Ingredient>());
                         Destroy(itemIsHolding);
                     }
@@ -113,6 +114,7 @@ public class Player : MonoBehaviour
         if( other.gameObject.tag == "Explosion" ){
             
             Camera.main.gameObject.GetComponent<ScreenShake>().Shake(.5f);
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("glass");
             
             switch( other.gameObject.GetComponent<Explosion>().TypeOfExplosion ){
                 case Explosion.ExplosionType.Fire:
@@ -168,11 +170,13 @@ public class Player : MonoBehaviour
         Vector2 localDir = transform.InverseTransformDirection( dir );
         itemIsHolding.GetComponent< Rigidbody2D >().isKinematic = false;
         itemIsHolding.GetComponent< Rigidbody2D >().AddForce(localDir * 3 , ForceMode2D.Impulse );
+        GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Woosh");
         StartCoroutine( DelayColliderEnable() );
 
     }
     
     private IEnumerator DoBroomSpeed(){
+        GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>().PlaySound("Bezem");
         StartCoroutine( BroomCooldown() );
         speed +=5;
         anim.SetBool("Broom", true);
@@ -188,6 +192,8 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(15f);
         canBroom = true;
         speedIcon.sprite = speedOn;
+        //play a sound 
+        speedIcon.transform.DOPunchScale( new Vector3( 1 , 1 , 1 ) , .2f );
     }
     private IEnumerator DelayColliderEnable(){
         yield return new WaitForSeconds(.5f);

@@ -5094,10 +5094,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 339744075}
   clips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 2ae6f8e678b0fc84f8a81e166f3191b1, type: 3}
+  - {fileID: 8300000, guid: 39dad9f26013df040babff9ad8a2e4ef, type: 3}
+  - {fileID: 8300000, guid: 20307fc6b44362947897903ef2a4e120, type: 3}
+  - {fileID: 8300000, guid: 0624f88136cacf94c87d93fdf4953d97, type: 3}
 --- !u!82 &339744075
 AudioSource:
   m_ObjectHideFlags: 0
