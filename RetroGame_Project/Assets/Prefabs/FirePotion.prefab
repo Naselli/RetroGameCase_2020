@@ -124,6 +124,7 @@ MonoBehaviour:
   poisonExplosion: {fileID: 142562892660770349, guid: f360c7f00e14df14b8ac165aa5d4e7c3, type: 3}
   fireExplosion: {fileID: 8882232329071629723, guid: 709a7629d3160124cbd7ace73e20aec1, type: 3}
   slimeExplosion: {fileID: 1011703369465597950, guid: 247f4db051bf4204db4503104bc40b7e, type: 3}
+  part: {fileID: 8511612932477839867}
 --- !u!212 &2704795028729661599
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2704795028729661597}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

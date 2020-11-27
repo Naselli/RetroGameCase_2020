@@ -51,7 +51,11 @@ public class Player : MonoBehaviour
         _moveVector.x = Input.GetAxisRaw( "Horizontal" + player );
         _moveVector.y = Input.GetAxisRaw( "Vertical" + player );
 
-        if( (_moveVector.y + _moveVector.x) != 0){
+        if( (_moveVector.y) != 0){
+            anim.SetBool(IsWalking, true);
+            CreateDust();
+        }
+        else if ( _moveVector.x != 0) {
             anim.SetBool(IsWalking, true);
             CreateDust();
         }

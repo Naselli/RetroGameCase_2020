@@ -12,19 +12,25 @@ public class Potion : MonoBehaviour
         Poison,
     }
 
-    [ SerializeField ] private PotionType typeOfPotion;
-    [ SerializeField ] private GameObject poisonExplosion;
-    [ SerializeField ] private GameObject fireExplosion;
-    [ SerializeField ] private GameObject slimeExplosion;
-
-    private SpriteRenderer sR;
-    private Rigidbody2D    rB;
+    [ SerializeField ] private PotionType     typeOfPotion;
+    [ SerializeField ] private GameObject     poisonExplosion;
+    [ SerializeField ] private GameObject     fireExplosion;
+    [ SerializeField ] private GameObject     slimeExplosion;
+    [ SerializeField ] private TrailRenderer part;
+    private                    SpriteRenderer sR;
+    private                    Rigidbody2D    rB;
     
     void Start()
     {
         GetComponent<Rigidbody2D>().AddTorque(360, ForceMode2D.Impulse);
         sR = GetComponent< SpriteRenderer >();
         rB = GetComponent< Rigidbody2D >();
+    }
+
+    private void Update(){
+        if( rB.velocity.magnitude > 0f ){
+            part.enabled = true;
+        }
     }
 
     private void OnTriggerEnter2D( Collider2D other ){
